@@ -1,0 +1,3252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tropical Villages — A luxury family nature resort in Varuna, Mysuru. Global cottage themes, serene village living, eco-luxury hospitality." />
+  <title>Tropical Villages | Luxury Resort in Mysuru for Family</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --bg-void: #070C09;
+      --bg-surface: #0D1611;
+      --bg-sand: #F5F2EB;
+      --accent-gold: #D4AF37;
+      --accent-gold-soft: rgba(212, 175, 55, 0.15);
+      --accent-emerald: #1E4631;
+      --accent-emerald-bright: #2F6B4A;
+      --text-primary: #F9F6F0;
+      --text-muted: #9BA89F;
+      --text-dark: #121A15;
+      --border-subtle: rgba(212, 175, 55, 0.18);
+      --glass-bg: rgba(13, 22, 17, 0.65);
+      --radius: 14px;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --header-h: 72px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-void);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    body.is-touch { cursor: auto; }
+    body.is-touch .cursor, body.is-touch .cursor-dot { display: none !important; }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+    ul { list-style: none; }
+    ::selection { background: var(--accent-gold); color: var(--bg-void); }
+
+    .container { width: min(1240px, 92%); margin-inline: auto; }
+
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .display {
+      font-family: var(--font-display);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: transform 0.4s var(--ease-out), background 0.35s, border-color 0.35s, color 0.35s, box-shadow 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    body.is-touch .btn { cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      box-shadow: 0 10px 40px rgba(212, 175, 55, 0.28);
+    }
+    .btn-gold:hover { background: #E0C15A; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+    .btn-dark {
+      background: var(--text-dark);
+      color: var(--text-primary);
+    }
+
+    /* Magnetic cursor */
+    .cursor, .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      will-change: transform, width, height;
+    }
+    .cursor {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out), background 0.35s, border-color 0.35s;
+      display: grid; place-items: center;
+      mix-blend-mode: difference;
+    }
+    .cursor span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      opacity: 0;
+      color: var(--bg-void);
+      transition: opacity 0.25s;
+    }
+    .cursor.is-hover {
+      width: 72px; height: 72px;
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      mix-blend-mode: normal;
+    }
+    .cursor.is-drag {
+      width: 88px; height: 88px;
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      mix-blend-mode: normal;
+    }
+    .cursor.is-drag span, .cursor.is-hover span { opacity: 1; }
+    .cursor-dot {
+      width: 6px; height: 6px;
+      background: var(--accent-gold);
+    }
+
+    /* Nav — overlays hero, no document offset */
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0; right: 0;
+      z-index: 1001;
+      height: var(--header-h);
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+    .nav.is-solid {
+      position: fixed;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      color: var(--accent-gold);
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .logo-text small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      margin-top: 4px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .nav-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .nav-phone:hover { color: var(--accent-gold); }
+    .hamburger {
+      display: none;
+      width: 44px; height: 44px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--text-primary);
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--bg-void);
+      padding: calc(var(--header-h) + 40px) 28px 40px;
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-out);
+      overflow-y: auto;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .mobile-drawer a {
+      display: block;
+      padding: 16px 0;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      border-bottom: 1px solid var(--border-subtle);
+      letter-spacing: -0.02em;
+    }
+
+    /* ========== HERO PINNED PORTAL ========== */
+    .hero-track {
+      position: relative;
+      height: 300vh;
+    }
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: var(--bg-void);
+    }
+    .hero-bg-type {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+      padding: 0 4vw;
+    }
+    .hero-bg-type .line {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(3.5rem, 11vw, 10rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: rgba(249, 246, 240, 0.42);
+      white-space: nowrap;
+      text-shadow: 0 0 60px rgba(249, 246, 240, 0.08);
+    }
+    .hero-bg-type .line em {
+      font-style: italic;
+      color: rgba(212, 175, 55, 0.72);
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+    }
+    .video-portal {
+      position: absolute;
+      top: 50%;
+      left: 58%;
+      width: 38vw;
+      height: 52vh;
+      min-width: 280px;
+      min-height: 340px;
+      border-radius: 200px;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+      border: 1px solid var(--border-subtle);
+      will-change: width, height, border-radius, left;
+    }
+    .video-portal video,
+    .video-portal .video-fallback {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.25);
+      will-change: transform;
+    }
+    .video-fallback {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7,12,9,0.2), rgba(7,12,9,0.55)),
+        url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1800&q=80') center / cover;
+      display: none;
+    }
+    .video-portal.no-video .video-fallback { display: block; }
+    .video-portal.no-video video { display: none; }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 28px;
+      opacity: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(7,12,9,0.15) 0%, rgba(7,12,9,0.35) 40%, rgba(7,12,9,0.92) 100%);
+    }
+    .hero-overlay.is-active { pointer-events: auto; }
+    .hero-copy { max-width: 780px; margin-bottom: 28px; }
+    .hero-coords {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent-gold);
+      margin-bottom: 18px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .hero-copy h1 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+    .hero-copy h1 em { font-style: italic; color: var(--accent-gold); }
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 560px;
+      font-weight: 400;
+    }
+
+    .booking-bar {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) auto;
+      gap: 12px;
+      align-items: end;
+      width: 100%;
+      min-width: 0;
+    }
+    .booking-form .field {
+      min-width: 0;
+      width: 100%;
+    }
+    .field label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .field input, .field select, .field textarea,
+    .modal-body input, .modal-body select, .modal-body textarea {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(7, 12, 9, 0.55);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      color-scheme: dark;
+      box-sizing: border-box;
+    }
+    .field input[type="date"] {
+      -webkit-appearance: none;
+      appearance: none;
+      min-width: 0;
+    }
+    .field input:focus, .field select:focus,
+    .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px var(--accent-gold-soft);
+    }
+    .booking-form .btn { height: 46px; white-space: nowrap; }
+
+    /* Sections common */
+    .section { padding: 120px 0; position: relative; }
+    .section-sand {
+      background: var(--bg-sand);
+      color: var(--text-dark);
+    }
+    .section-sand .meta { color: var(--accent-emerald); }
+    .section-sand .text-muted { color: #5F6B63; }
+    .section-head {
+      margin-bottom: 28px;
+      max-width: none;
+      width: 100%;
+    }
+    .section-head h2,
+    .mega-head {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-top: 6px;
+      width: 100%;
+    }
+    .section-head h2 em,
+    .mega-head em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+    .mega-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.08em 0.2em;
+      margin: 0;
+    }
+    .mega-head .mh-lead {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .mega-head em {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    .text-muted { color: var(--text-muted); }
+
+    /* Split text wrappers */
+    .split-line { overflow: hidden; display: block; }
+    .split-word {
+      display: inline-block;
+      transform: translateY(110%);
+      will-change: transform;
+    }
+
+    /* Parallax windows */
+    .parallax-window {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      clip-path: inset(100% 0 0 0);
+    }
+    .parallax-window img {
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-media {
+      position: relative;
+      height: 620px;
+    }
+    .about-media .pw-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 78%;
+      height: 460px;
+      z-index: 1;
+    }
+    .about-media .pw-sec {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      height: 300px;
+      z-index: 2;
+      border: 8px solid var(--bg-void);
+    }
+    .about-copy p {
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .stat-item .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--accent-gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-item .stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ========== 3D COVERFLOW ========== */
+    .cottages-section {
+      overflow: hidden;
+      padding: 64px 0;
+    }
+    .cottages-layout {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.75fr) 1.7fr;
+      gap: 20px 32px;
+      align-items: stretch;
+    }
+    .cottages-aside {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+    }
+    .cottages-aside .section-head {
+      margin-bottom: 0;
+      max-width: none;
+    }
+    .cottages-aside .section-head h2,
+    .cottages-aside .mega-head {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      margin-top: 6px;
+    }
+    .coverflow-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0;
+      justify-content: flex-start;
+    }
+    .coverflow-wrap {
+      position: relative;
+      perspective: 1400px;
+      height: 420px;
+      margin-top: 0;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .coverflow-track {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+    .cottage-card {
+      position: absolute;
+      width: min(360px, 72vw);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: filter 0.45s;
+      will-change: transform, filter, opacity;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    }
+    .cottage-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+    .cottage-body { padding: 16px 18px 18px; }
+    .cottage-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .cottage-body p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+      min-height: 0;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .amenity-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .amenity {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      background: rgba(7,12,9,0.4);
+    }
+    .cottage-body .btn {
+      padding: 10px 16px;
+      font-size: 0.72rem;
+      width: 100%;
+    }
+    .coverflow-ui {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 0;
+      flex-wrap: wrap;
+    }
+    .coverflow-nav { display: flex; gap: 8px; }
+    .mag-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      display: grid; place-items: center;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .mag-btn:hover {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      border-color: var(--accent-gold);
+    }
+    .coverflow-progress {
+      flex: 1;
+      min-width: 100px;
+      max-width: 180px;
+    }
+    .progress-bar {
+      height: 2px;
+      background: rgba(212,175,55,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: var(--accent-gold);
+      transition: width 0.45s var(--ease-out);
+    }
+    .coverflow-counter {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+    .tab-pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: none;
+    }
+    body.is-touch .tab-pill { cursor: pointer; }
+    .tab-pill.active, .tab-pill:hover {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      border-color: var(--accent-gold);
+    }
+
+    /* ========== SPLIT CURTAIN ========== */
+    .split-curtain {
+      display: flex;
+      height: 85vh;
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .curtain-panel {
+      position: relative;
+      flex: 1 1 50%;
+      overflow: hidden;
+      transition: flex 0.7s var(--ease-out);
+      cursor: none;
+    }
+    body.is-touch .curtain-panel { cursor: pointer; }
+    .curtain-panel:hover,
+    .curtain-panel.is-expanded { flex: 1.7 1 68%; }
+    .curtain-panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.08);
+      transition: transform 1.2s var(--ease-out);
+    }
+    .curtain-panel:hover img,
+    .curtain-panel.is-expanded img { transform: scale(1); }
+    .curtain-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 12, 9, 0.35);
+      z-index: 1;
+      transition: background 0.5s ease;
+    }
+    .curtain-panel:hover::before,
+    .curtain-panel.is-expanded::before {
+      background: rgba(7, 12, 9, 0.28);
+    }
+    .curtain-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(7, 12, 9, 0.45) 0%,
+          rgba(7, 12, 9, 0.25) 28%,
+          rgba(7, 12, 9, 0.55) 55%,
+          rgba(7, 12, 9, 0.94) 100%);
+      z-index: 1;
+    }
+    .curtain-content {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 2;
+      padding: 40px 36px 44px;
+      max-width: 520px;
+      width: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(7, 12, 9, 0.55) 18%, rgba(7, 12, 9, 0.88) 100%);
+    }
+    .curtain-content .meta {
+      color: var(--accent-gold);
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.65);
+    }
+    .curtain-content h3 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+      letter-spacing: -0.02em;
+      margin: 12px 0 14px;
+      line-height: 1.12;
+      color: var(--text-primary);
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.75);
+    }
+    .curtain-content p {
+      color: rgba(249, 246, 240, 0.88);
+      margin-bottom: 22px;
+      font-size: 0.95rem;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+    }
+    .curtain-content .btn-ghost {
+      background: rgba(7, 12, 9, 0.45);
+      border-color: rgba(212, 175, 55, 0.55);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Drawer for read more */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7,12,9,0.72);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    .drawer-overlay.open { opacity: 1; visibility: visible; }
+    .drawer {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(480px, 100%);
+      height: 100%;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-subtle);
+      padding: 48px 36px;
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-out);
+      overflow-y: auto;
+    }
+    .drawer-overlay.open .drawer { transform: translateX(0); }
+    .drawer h3 {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin: 16px 0 20px;
+    }
+    .drawer p { color: var(--text-muted); margin-bottom: 16px; }
+    .drawer-close {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-primary);
+      display: grid; place-items: center;
+    }
+
+    /* ========== OFFER ========== */
+    .offer-banner {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 80px 40px;
+      border: 1px solid var(--border-subtle);
+    }
+    .offer-banner .offer-bg {
+      position: absolute;
+      inset: -10%;
+      background:
+        linear-gradient(180deg, rgba(7,12,9,0.7), rgba(7,12,9,0.88)),
+        url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80') center / cover;
+      will-change: transform;
+    }
+    .offer-inner { position: relative; z-index: 1; max-width: 680px; }
+    .offer-inner h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      letter-spacing: -0.02em;
+      margin: 16px 0 18px;
+      line-height: 1.1;
+    }
+    .offer-inner p { color: var(--text-muted); margin-bottom: 28px; }
+    .promo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border: 1px dashed var(--accent-gold);
+      border-radius: 10px;
+      margin-bottom: 28px;
+      background: rgba(212,175,55,0.08);
+      font-family: var(--font-mono);
+      letter-spacing: 0.18em;
+      color: var(--accent-gold);
+      cursor: none;
+      transition: background 0.3s;
+    }
+    body.is-touch .promo-badge { cursor: pointer; }
+    .promo-badge:hover { background: rgba(212,175,55,0.18); }
+    .promo-badge small {
+      font-size: 9px;
+      opacity: 0.7;
+      letter-spacing: 0.12em;
+    }
+    .copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 5000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ========== TESTIMONIALS STACK ========== */
+    #testimonials {
+      padding: 64px 0;
+    }
+    .testimonials-layout {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.85fr) 1.6fr;
+      gap: 28px 40px;
+      align-items: stretch;
+    }
+    .testimonials-layout .section-head {
+      margin-bottom: 0;
+      max-width: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .testimonials-layout .section-head h2,
+    .testimonials-layout .mega-head {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      margin-top: 6px;
+    }
+    .testimonial-stage {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      margin: 0;
+      perspective: 1200px;
+    }
+    .t-card {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 0.9fr 1.25fr;
+      overflow: hidden;
+      transform-origin: center bottom;
+      will-change: transform, opacity;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    .t-card-img {
+      position: relative;
+      min-height: 100%;
+      overflow: hidden;
+      background: var(--accent-emerald);
+    }
+    .t-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .t-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 60%, rgba(13, 22, 17, 0.35));
+      pointer-events: none;
+    }
+    .t-card-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .t-card .stars {
+      color: var(--accent-gold);
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+    .t-card blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+    .t-card .author {
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .t-card .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+    .t-card .author-meta { min-width: 0; }
+    .t-card .author span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .t-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 0;
+      flex-wrap: wrap;
+    }
+    .t-controls .btn {
+      padding: 10px 18px;
+      font-size: 0.75rem;
+    }
+
+    /* ========== MARQUEE GALLERY ========== */
+    .gallery-section { overflow: hidden; }
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+    .marquee-row {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      will-change: transform;
+      margin-bottom: 18px;
+    }
+    .marquee-row.row-b { margin-bottom: 0; }
+    .marquee-item {
+      position: relative;
+      width: 340px;
+      height: 240px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+      cursor: none;
+    }
+    body.is-touch .marquee-item { cursor: pointer; }
+    .marquee-item.filtered-out { display: none; }
+    .marquee-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease-out);
+    }
+    .marquee-item:hover img { transform: scale(1.06); }
+    .marquee-caption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(7,12,9,0.9));
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(7,12,9,0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: min(92vw, 1100px);
+      max-height: 82vh;
+      border-radius: var(--radius);
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      display: grid; place-items: center;
+    }
+
+    /* ========== BLOG ========== */
+    #journal {
+      padding: 64px 0 72px;
+    }
+    .journal-masthead {
+      margin-bottom: 28px;
+      max-width: none;
+      width: 100%;
+    }
+    .journal-masthead .meta {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .journal-masthead .mega-head {
+      font-size: clamp(3.8rem, 13vw, 10rem);
+      line-height: 0.86;
+      flex-wrap: nowrap;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .blog-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out), border-color 0.3s;
+    }
+    .blog-card:hover { border-color: rgba(212,175,55,0.4); }
+    .blog-img {
+      height: 220px;
+      overflow: hidden;
+      perspective: 800px;
+      background: var(--accent-emerald);
+    }
+    .blog-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.15s linear;
+    }
+    .blog-body { padding: 28px; }
+    .blog-body .meta {
+      color: var(--accent-gold) !important;
+    }
+    .blog-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 12px 0 16px;
+      color: var(--text-primary) !important;
+    }
+    .blog-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ========== NEWSLETTER + FOOTER ========== */
+    .newsletter {
+      position: relative;
+      padding: 88px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .newsletter-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1800&q=80') center / cover no-repeat;
+      transform: scale(1.04);
+    }
+    .newsletter-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7, 12, 9, 0.78) 0%, rgba(7, 12, 9, 0.72) 50%, rgba(7, 12, 9, 0.88) 100%),
+        radial-gradient(ellipse at center, rgba(7, 12, 9, 0.35) 0%, rgba(7, 12, 9, 0.75) 100%);
+    }
+    .newsletter .container {
+      position: relative;
+      z-index: 1;
+    }
+    .newsletter .mega-head {
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      margin: 8px auto 16px;
+      max-width: 1100px;
+      text-align: left;
+    }
+    .newsletter > .container > p,
+    .newsletter .nl-lead {
+      color: rgba(249, 246, 240, 0.78);
+      margin-bottom: 28px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .nl-form {
+      display: flex;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 12px;
+      border-radius: 999px;
+      background: rgba(13, 22, 17, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+    }
+    .nl-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(7, 12, 9, 0.45);
+      color: var(--text-primary);
+      outline: none;
+    }
+    .nl-form input:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px var(--accent-gold-soft);
+    }
+    .nl-msg {
+      margin-top: 16px;
+      min-height: 24px;
+      color: var(--accent-gold);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .nl-msg.show { opacity: 1; }
+    .nl-msg.error { color: #E8A0A0; }
+
+    .footer {
+      background: #050805;
+      border-top: 1px solid var(--border-subtle);
+      padding: 80px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+      gap: 40px;
+      padding-bottom: 60px;
+    }
+    .footer-bio {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin: 20px 0 28px;
+      max-width: 320px;
+    }
+    .socials { display: flex; gap: 12px; }
+    .socials a {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      display: grid; place-items: center;
+      color: var(--text-primary);
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .socials a:hover {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--bg-void);
+    }
+    .footer h4 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.3s, padding-left 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent-gold); padding-left: 4px; }
+    .footer-contact li {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .footer-contact i, .footer-contact [data-lucide] {
+      color: var(--accent-gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+      width: 16px; height: 16px;
+    }
+    .footer-contact a:hover { color: var(--accent-gold); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding: 24px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* ========== BOOKING MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2500;
+      background: rgba(7,12,9,0.78);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      width: min(560px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .modal-overlay.open .modal { transform: none; }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 28px 0;
+    }
+    .modal-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+    .modal-body { padding: 20px 28px 28px; }
+    .modal-lead { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .form-group label .req { color: var(--accent-gold); }
+    .phone-meta {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+    .phone-counter {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .phone-counter.complete {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald-bright);
+      color: var(--text-primary);
+    }
+    .stepper {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(7,12,9,0.55);
+    }
+    .stepper button {
+      width: 44px; height: 46px;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+    .stepper button:hover { background: var(--accent-gold-soft); color: var(--accent-gold); }
+    .stepper input {
+      flex: 1;
+      text-align: center;
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      -moz-appearance: textfield;
+    }
+    .stepper input::-webkit-outer-spin-button,
+    .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .form-error {
+      display: none;
+      font-size: 0.75rem;
+      color: #E8A0A0;
+      margin-top: 6px;
+    }
+    .form-group.invalid .form-error { display: block; }
+    .form-group.invalid input,
+    .form-group.invalid select,
+    .form-group.invalid textarea { border-color: #E8A0A0; }
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 48px 20px;
+    }
+    .modal-success.show { display: block; }
+    .modal-success [data-lucide] {
+      width: 48px; height: 48px;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+    .modal-success h4 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 8px;
+    }
+    .modal-form.hide { display: none; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .nav-links, .nav-phone { display: none; }
+      .hamburger { display: flex; }
+      .nav-actions { gap: 10px; }
+      .nav-actions .btn-gold {
+        padding: 10px 14px;
+        font-size: 0.72rem;
+      }
+      .booking-form { grid-template-columns: repeat(3, 1fr); }
+      .booking-form .btn { grid-column: 1 / -1; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-media { height: 480px; }
+      .blog-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .video-portal { width: 48vw; height: 50vh; left: 55%; }
+    }
+
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .container { width: min(100%, calc(100% - 32px)); }
+      .section { padding: 64px 0; }
+      .nav-inner { gap: 10px; }
+      .logo { gap: 8px; min-width: 0; }
+      .logo-mark { width: 32px; height: 32px; flex-shrink: 0; }
+      .logo-text {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .logo-text small { font-size: 8px; letter-spacing: 0.12em; }
+      .nav-actions { gap: 8px; }
+      .nav-actions .btn-gold { display: none; }
+      .hamburger { width: 40px; height: 40px; flex-shrink: 0; }
+
+      /* —— Mobile hero redesign: stacked media + copy (no portal scrub) —— */
+      .hero-track {
+        height: auto;
+        min-height: 0;
+      }
+      .hero-sticky {
+        position: relative;
+        height: auto;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        padding: calc(var(--header-h) + 16px) 0 24px;
+        overflow: visible;
+      }
+      .hero-bg-type {
+        position: relative;
+        inset: auto;
+        flex: 0 0 auto;
+        padding: 0 16px 10px;
+        justify-content: flex-start;
+        z-index: 2;
+        order: 1;
+      }
+      .hero-bg-type .line {
+        font-size: clamp(2.8rem, 13vw, 4rem);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        color: rgba(249, 246, 240, 0.88);
+        white-space: nowrap;
+        overflow: visible;
+      }
+      .hero-bg-type .line em {
+        color: var(--accent-gold);
+      }
+      .video-portal {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: calc(100% - 32px) !important;
+        height: min(42vh, 360px) !important;
+        min-width: 0 !important;
+        min-height: 220px !important;
+        margin: 0 16px 18px;
+        border-radius: 28px !important;
+        clip-path: none !important;
+        order: 2;
+        z-index: 1;
+        flex-shrink: 0;
+      }
+      .video-portal video,
+      .video-portal .video-fallback {
+        transform: scale(1.05) !important;
+      }
+      .hero-overlay {
+        position: relative !important;
+        inset: auto !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: none !important;
+        padding: 0 16px 8px;
+        order: 3;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+      .hero-overlay > .container {
+        width: 100%;
+        padding: 0;
+      }
+      .hero-copy { margin-bottom: 0; max-width: none; }
+      .hero-coords {
+        font-size: 10px;
+        margin-bottom: 8px;
+      }
+      .hero-eyebrow {
+        font-size: 10px;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+      .hero-copy h1 {
+        font-size: clamp(1.75rem, 6.5vw, 2.15rem);
+        margin-bottom: 10px;
+        line-height: 1.15;
+      }
+      .hero-sub {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        margin-bottom: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .hero-mobile-ctas {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 4px;
+      }
+      .hero-mobile-ctas .btn {
+        flex: 1 1 auto;
+        min-width: 140px;
+        padding: 12px 18px;
+        font-size: 0.75rem;
+      }
+      .booking-bar {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 12px;
+        border-radius: var(--radius);
+        order: 4;
+        box-sizing: border-box;
+      }
+      .booking-form {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+        width: 100%;
+      }
+      .booking-form .field:nth-child(3),
+      .booking-form .field:nth-child(4),
+      .booking-form .field:nth-child(5) {
+        display: none;
+      }
+      .booking-form .field input[type="date"] {
+        font-size: 0.78rem;
+        padding: 10px 8px;
+      }
+      .booking-form .btn {
+        grid-column: 1 / -1;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .split-curtain { flex-direction: column; height: auto; }
+      .curtain-panel { min-height: 380px; flex: none !important; }
+      .curtain-panel::before { background: rgba(7, 12, 9, 0.4); }
+      .curtain-panel::after {
+        background: linear-gradient(180deg,
+          rgba(7, 12, 9, 0.5) 0%,
+          rgba(7, 12, 9, 0.35) 30%,
+          rgba(7, 12, 9, 0.75) 60%,
+          rgba(7, 12, 9, 0.96) 100%);
+      }
+      .curtain-content {
+        padding: 28px 22px 32px;
+        max-width: none;
+        background: linear-gradient(180deg, transparent 0%, rgba(7, 12, 9, 0.7) 12%, rgba(7, 12, 9, 0.92) 100%);
+      }
+      .curtain-content h3 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+      .stat-row { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; gap: 16px; }
+      .about-media { height: 380px; }
+      .about-media .pw-main { height: 280px; }
+      .about-media .pw-sec { height: 180px; }
+
+      .journal-masthead .mega-head,
+      .section-head .mega-head,
+      .newsletter .mega-head,
+      .mega-head {
+        font-size: clamp(2.4rem, 11vw, 3.6rem);
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 0;
+        line-height: 0.95;
+      }
+      .mega-head em { margin-left: 0; white-space: normal; }
+      .mega-head .mh-lead { white-space: normal; }
+      #journal { padding: 48px 0 56px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .coverflow-wrap {
+        height: 480px;
+        margin-top: 8px;
+      }
+      .cottage-card {
+        width: min(320px, 88vw);
+      }
+      .cottage-card img {
+        height: 180px;
+      }
+      .cottage-body {
+        padding: 20px 20px 22px;
+      }
+      .cottage-body h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      .cottage-body p {
+        font-size: 0.88rem;
+        margin-bottom: 14px;
+        -webkit-line-clamp: 3;
+        line-height: 1.5;
+      }
+      .amenity-row {
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .amenity {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+      }
+      .cottage-body .btn {
+        padding: 12px 16px;
+        margin-top: 2px;
+      }
+      .tab-pill {
+        padding: 10px 14px;
+        font-size: 0.78rem;
+      }
+      .coverflow-tabs { gap: 8px; margin-bottom: 4px; }
+      .coverflow-ui { margin-top: 4px; gap: 14px; }
+      .mag-btn { width: 44px; height: 44px; }
+      .marquee-item { width: 240px; height: 170px; }
+      .nl-form {
+        border-radius: var(--radius);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nl-form input { min-width: 0; }
+      .offer-banner { padding: 48px 24px; min-height: 0; }
+      .testimonials-layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      #testimonials { padding: 48px 0; }
+      .testimonial-stage { height: auto; min-height: 340px; }
+      .t-card {
+        grid-template-columns: 1fr;
+        grid-template-rows: 150px 1fr;
+      }
+      .t-card-body { padding: 16px 18px 20px; }
+      .testimonials-layout .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .cottages-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .cottages-section { padding: 48px 0 56px; }
+      .cottages-aside {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+      }
+      .cottages-aside .section-head {
+        flex: 1 1 100%;
+        margin-bottom: 4px;
+      }
+      .cottages-aside .mega-head {
+        margin-bottom: 4px;
+      }
+      .coverflow-tabs { width: 100%; }
+      .coverflow-ui {
+        width: 100%;
+        margin-left: 0;
+        padding-top: 4px;
+      }
+      .modal { width: 100%; max-height: 94vh; }
+      .modal-header, .modal-body { padding-left: 20px; padding-right: 20px; }
+    }
+
+    /* Desktop-only: hide mobile CTAs */
+    .hero-mobile-ctas { display: none; }
+
+    @media (max-width: 480px) {
+      .booking-form {
+        grid-template-columns: 1fr;
+      }
+      .booking-form .field input[type="date"] {
+        font-size: 0.85rem;
+        padding: 12px 12px;
+      }
+      .logo-text { font-size: 0.85rem; max-width: 42vw; }
+      .hero-bg-type .line { font-size: clamp(2.4rem, 12vw, 3.2rem); }
+      .video-portal {
+        height: min(38vh, 300px) !important;
+        border-radius: 22px !important;
+      }
+      .coverflow-wrap { height: 500px; }
+      .cottage-card { width: min(300px, 90vw); }
+      .cottage-body { padding: 18px 18px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel"></span></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="copy-toast" id="copyToast">Promo code copied</div>
+
+  <!-- Nav -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="logo" data-magnetic>
+        <div class="logo-mark"><i data-lucide="leaf" style="width:18px;height:18px;"></i></div>
+        <div class="logo-text">TROPICAL VILLAGES<small>MYSURU · VARUNA</small></div>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#cottages">Cottages</a>
+        <a href="#experiences">Dining &amp; Wellness</a>
+        <a href="#offer">Offers</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#journal">Journal</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+917349696655" class="nav-phone" data-magnetic>
+          <i data-lucide="phone" style="width:14px;height:14px;color:var(--accent-gold);"></i>
+          +91-734 969 6655
+        </a>
+        <button class="btn btn-gold" data-open-modal data-magnetic type="button">
+          Book Now <span>→</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu" type="button" data-magnetic>
+          <i data-lucide="menu" style="width:20px;height:20px;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="#about">About</a>
+    <a href="#cottages">Cottages</a>
+    <a href="#experiences">Dining &amp; Wellness</a>
+    <a href="#offer">Offers</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+    <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px;">
+      <a href="tel:+917349696655" class="btn btn-ghost">+91-734 969 6655</a>
+      <button class="btn btn-gold" data-open-modal type="button">Book Now</button>
+    </div>
+  </div>
+
+  <div id="top"></div>
+
+  <!-- ========== HERO PORTAL ========== -->
+  <section class="hero-track" id="hero">
+    <div class="hero-sticky">
+      <div class="hero-bg-type" aria-hidden="true">
+        <div class="line">TROPICAL</div>
+        <div class="line"><em>Villages</em></div>
+        <div class="line">MYSURU</div>
+      </div>
+
+      <div class="video-portal" id="videoPortal">
+        <video id="heroVideo" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1400&q=80">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-palm-trees-swaying-in-the-wind-4271-large.mp4" type="video/mp4" />
+          <source src="https://cdn.coverr.co/videos/coverr-palm-trees-against-a-blue-sky-5584/1080p.mp4" type="video/mp4" />
+        </video>
+        <div class="video-fallback" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-overlay" id="heroOverlay">
+        <div class="container">
+          <div class="hero-copy">
+            <div class="hero-coords">12.2958° N, 76.6394° E · VARUNA, MYSURU</div>
+            <div class="hero-eyebrow">A LUXURY RESORT IN MYSORE FOR FAMILY · VARUNA, KARNATAKA</div>
+            <h1>Where Global Cottage Luxury Meets <em>Serene Village Living</em></h1>
+            <p class="hero-sub">Step into a world of tranquillity and elegance at Tropical Villages, where we redefine the essence of village living with a premium touch.</p>
+            <div class="hero-mobile-ctas">
+              <a href="#cottages" class="btn btn-gold" data-magnetic>Explore Cottages</a>
+              <button class="btn btn-ghost" data-open-modal type="button" data-magnetic>Book Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="booking-bar" id="bookingBar">
+          <form class="booking-form" id="heroBookingForm">
+            <div class="field">
+              <label for="heroCheckIn">Check-in Date</label>
+              <input type="date" id="heroCheckIn" required />
+            </div>
+            <div class="field">
+              <label for="heroCheckOut">Check-out Date</label>
+              <input type="date" id="heroCheckOut" required />
+            </div>
+            <div class="field">
+              <label for="heroCottage">Cottage Theme</label>
+              <select id="heroCottage">
+                <option value="All">All Themes</option>
+                <option value="European">European</option>
+                <option value="American">American</option>
+                <option value="African">African</option>
+                <option value="Asian">Asian</option>
+                <option value="Mangala Kutira">Mangala Kutira</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="heroAdults">Adults</label>
+              <select id="heroAdults">
+                <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="heroChildren">Children</label>
+              <select id="heroChildren">
+                <option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-gold" data-magnetic>Check Availability</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-media">
+        <div class="parallax-window pw-main">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1000&q=80" alt="Luxury cottage nestled in tropical greenery" />
+        </div>
+        <div class="parallax-window pw-sec">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Serene resort pool among palms" />
+        </div>
+      </div>
+      <div class="about-copy">
+        <div class="section-head" style="margin-bottom:20px;">
+          <span class="meta">Our Story</span>
+          <h2 class="mega-head" aria-label="Our Journey to Your Perfect Getaway">
+            <span class="mh-lead">Our Journey to Your</span>
+            <em>Perfect Getaway</em>
+          </h2>
+        </div>
+        <p>Step into a world of tranquillity and elegance at Tropical Villages, where we redefine the essence of village living with a premium touch. Our resort offers an unparalleled experience, where guests can immerse themselves in the lush greenery and authentic atmosphere of a traditional village while indulging in the comforts of contemporary luxury.</p>
+        <p>At Tropical Villages, we pride ourselves on offering a new era of village living, where every detail has been carefully curated to provide an unforgettable experience. From the moment you arrive, be greeted by the sight of quaint cottages nestled amidst verdant gardens and swaying palm trees. Our premium villages exude an air of sophistication, with elegantly designed accommodations that blend seamlessly with the natural beauty of our surroundings.</p>
+        <div class="stat-row" id="statRow">
+          <div class="stat-item">
+            <div class="stat-num" data-count="5" data-suffix="+">0+</div>
+            <div class="stat-label">Global Village Themes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" data-count="100" data-suffix="%">0%</div>
+            <div class="stat-label">Lush Eco-Sanctuary</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" data-count="10" data-suffix="%">0%</div>
+            <div class="stat-label">Advance Booking Privilege</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COTTAGES COVERFLOW ========== -->
+  <section class="section cottages-section" id="cottages">
+    <div class="container cottages-layout">
+      <div class="cottages-aside">
+        <div class="section-head">
+          <span class="meta">Accommodations</span>
+          <h2 class="mega-head" aria-label="Our Signature Cottages">
+            <span class="mh-lead">Our Signature</span>
+            <em>Cottages</em>
+          </h2>
+        </div>
+        <div class="coverflow-tabs" id="coverflowTabs" role="tablist"></div>
+        <div class="coverflow-ui">
+          <div class="coverflow-nav">
+            <button class="mag-btn" id="cfPrev" type="button" aria-label="Previous" data-magnetic>
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <button class="mag-btn" id="cfNext" type="button" aria-label="Next" data-magnetic>
+              <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+          <div class="coverflow-progress">
+            <div class="progress-bar"><div class="progress-fill" id="cfProgress"></div></div>
+            <div class="coverflow-counter"><span id="cfIndex">01</span> / 05</div>
+          </div>
+        </div>
+      </div>
+      <div class="coverflow-wrap" id="coverflow" data-cursor="DRAG">
+        <div class="coverflow-track" id="coverflowTrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SPLIT CURTAIN ========== -->
+  <section class="split-curtain" id="experiences">
+    <div class="curtain-panel" data-drawer="dining">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80" alt="Fine dining at Tropical Villages" />
+      <div class="curtain-content">
+        <span class="meta">Eat and Drink</span>
+        <h3>Indulge in exceptional &amp; Local Foodies</h3>
+        <p>Farm-fresh Mysuru culinary heritage — multi-cuisine dining beneath the palms, sourced from our gardens and local artisans.</p>
+        <button class="btn btn-ghost" data-drawer-open="dining" type="button" data-magnetic>Read More</button>
+      </div>
+    </div>
+    <div class="curtain-panel" data-drawer="wellness">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1400&q=80" alt="Wellness spa at Tropical Villages" />
+      <div class="curtain-content">
+        <span class="meta">Wellness</span>
+        <h3>A truly luxurious experience for the senses</h3>
+        <p>Botanical spa rituals, nature walks, and serene restoration spaces — holistic rejuvenation in Varuna’s quiet green embrace.</p>
+        <button class="btn btn-ghost" data-drawer-open="wellness" type="button" data-magnetic>Read More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OFFER ========== -->
+  <section class="section" id="offer">
+    <div class="container">
+      <div class="offer-banner">
+        <div class="offer-bg" id="offerParallax"></div>
+        <div class="offer-inner">
+          <span class="meta">Seasonal Privilege</span>
+          <h2 class="mega-head" style="justify-content:center;text-align:center;">
+            <span class="mh-lead" style="flex:0 0 auto;">Summer</span>
+            <em>Offer</em>
+          </h2>
+          <p>Benefit from a 10% discount, making your reservations with a minimum of 3 days in advance.</p>
+          <button class="promo-badge" id="promoBadge" type="button" data-magnetic title="Click to copy">
+            <small>PROMO</small> TROPICAL10
+            <i data-lucide="copy" style="width:14px;height:14px;"></i>
+          </button>
+          <div>
+            <button class="btn btn-gold" data-open-modal data-summer-offer data-magnetic type="button">Find Out More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="section" id="testimonials">
+    <div class="container testimonials-layout">
+      <div class="section-head">
+        <div>
+          <span class="meta">Guest Voices</span>
+          <h2 class="mega-head" aria-label="Stories from Our Families">
+            <span class="mh-lead">Stories from</span>
+            <em>Our Families</em>
+          </h2>
+        </div>
+        <div class="t-controls">
+          <button class="btn btn-ghost" id="nextStory" type="button" data-magnetic>Next Story →</button>
+        </div>
+      </div>
+      <div class="testimonial-stage" id="testimonialStage" data-cursor="DRAG"></div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY MARQUEE ========== -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-head journal-masthead" style="margin-bottom:24px;">
+        <span class="meta">Visual Journey</span>
+        <h2 class="mega-head" aria-label="Resort Gallery">
+          <span class="mh-lead">Resort</span>
+          <em>Gallery</em>
+        </h2>
+      </div>
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="tab-pill active" data-filter="all" type="button">All</button>
+        <button class="tab-pill" data-filter="heritage" type="button">Kerala &amp; Heritage</button>
+        <button class="tab-pill" data-filter="asian" type="button">Asian</button>
+        <button class="tab-pill" data-filter="american" type="button">American</button>
+        <button class="tab-pill" data-filter="african" type="button">African</button>
+        <button class="tab-pill" data-filter="european" type="button">European</button>
+      </div>
+    </div>
+    <div class="marquee-row row-a" id="marqueeA"></div>
+    <div class="marquee-row row-b" id="marqueeB"></div>
+  </section>
+
+  <!-- ========== JOURNAL ========== -->
+  <section class="section" id="journal">
+    <div class="container">
+      <div class="journal-masthead">
+        <span class="meta">News &amp; Articles</span>
+        <h2 class="mega-head" aria-label="From Our Journal">
+          <span class="mh-lead">From Our</span>
+          <em>Journal</em>
+        </h2>
+      </div>
+      <div class="blog-grid">
+        <article class="blog-card" data-tilt>
+          <div class="blog-img">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Family resort holiday with pool and palms" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          <div class="blog-body">
+            <span class="meta">06 Mar</span>
+            <h3>Resorts vs Hotels: Why Resorts Are Better for Family Holidays</h3>
+            <a href="#" class="blog-link" data-magnetic>Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+          </div>
+        </article>
+        <article class="blog-card" data-tilt>
+          <div class="blog-img">
+            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Nature resort escape under palm trees" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          <div class="blog-body">
+            <span class="meta">12 Feb</span>
+            <h3>Top 5 Reasons to Escape to a Nature Resort for Your Next Vacation</h3>
+            <a href="#" class="blog-link" data-magnetic>Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+          </div>
+        </article>
+        <article class="blog-card" data-tilt>
+          <div class="blog-img">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="Sunlit forest path reconnecting with nature" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          <div class="blog-body">
+            <span class="meta">24 Jan</span>
+            <h3>Why Resorts Are the Best Way to Reconnect with Nature</h3>
+            <a href="#" class="blog-link" data-magnetic>Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter" id="newsletter">
+    <div class="newsletter-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="meta">Stay Connected</span>
+      <h2 class="mega-head" aria-label="Subscribe for Exclusive Seasonal Offers">
+        <span class="mh-lead">Subscribe for Exclusive</span>
+        <em>Seasonal Offers</em>
+      </h2>
+      <p class="nl-lead">Early-bird packages, cottage releases, and curated family experiences — delivered quietly.</p>
+      <form class="nl-form" id="newsletterForm">
+        <input type="email" id="nlEmail" placeholder="Your email address" required aria-label="Email" />
+        <button type="submit" class="btn btn-gold" data-magnetic>Subscribe</button>
+      </form>
+      <p class="nl-msg" id="nlMsg" role="status"></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#top" class="logo" data-magnetic>
+            <div class="logo-mark"><i data-lucide="leaf" style="width:18px;height:18px;"></i></div>
+            <div class="logo-text">TROPICAL VILLAGES<small>MYSURU</small></div>
+          </a>
+          <p class="footer-bio">Welcome to The Tropical villages 'A Luxury Resort in Mysore for Family' where the charm of village life meets the luxury of modern amenities.</p>
+          <div class="socials">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" data-magnetic><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" data-magnetic><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" data-magnetic><i data-lucide="youtube" style="width:16px;height:16px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#top">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#cottages">Rooms</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Our Rooms</h4>
+          <ul class="footer-links">
+            <li><a href="#cottages">Asian Cottages</a></li>
+            <li><a href="#cottages">African Cottages</a></li>
+            <li><a href="#cottages">American Cottages</a></li>
+            <li><a href="#cottages">European cottage</a></li>
+            <li><a href="#cottages">Mangala Kutira</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul class="footer-contact">
+            <li>
+              <i data-lucide="phone"></i>
+              <a href="tel:+917349696655">+91-734 969 6655</a>
+            </li>
+            <li>
+              <i data-lucide="mail"></i>
+              <a href="mailto:reservations@tropicalvillages.com">reservations@tropicalvillages.com</a>
+            </li>
+            <li>
+              <i data-lucide="map-pin"></i>
+              <span>35/1, Suthur road Mosambayanahalli, hobli, Varuna, Mysuru, Karnataka 570010</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Tropical Villages. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Experience drawers -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer" role="dialog" aria-modal="true">
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Close" data-magnetic>
+        <i data-lucide="x" style="width:18px;height:18px;"></i>
+      </button>
+      <span class="meta" id="drawerMeta"></span>
+      <h3 id="drawerTitle"></h3>
+      <div id="drawerBody"></div>
+      <button class="btn btn-gold" data-open-modal type="button" style="margin-top:24px;" data-magnetic>Reserve Your Stay</button>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Reserve Your Escape</h3>
+        <button class="drawer-close" id="modalClose" type="button" aria-label="Close" data-magnetic>
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-success" id="modalSuccess">
+          <i data-lucide="check-circle-2"></i>
+          <h4>Inquiry Received</h4>
+          <p class="text-muted">Our reservations team will confirm availability shortly.</p>
+        </div>
+        <form class="modal-form" id="bookingForm" novalidate>
+          <p class="modal-lead">Complete the form — checkout defaults to +3 days to qualify for the Summer Offer.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guestName">Name <span class="req">*</span></label>
+              <input type="text" id="guestName" required autocomplete="name" />
+              <div class="form-error">Please enter your name</div>
+            </div>
+            <div class="form-group">
+              <label for="guestPhone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="guestPhone" required maxlength="10" inputmode="numeric" autocomplete="tel" />
+              <div class="phone-meta"><span class="phone-counter" id="phoneCounter">0 / 10</span></div>
+              <div class="form-error">Enter a valid 10-digit number</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="guestEmail">Email Address <span class="req">*</span></label>
+            <input type="email" id="guestEmail" required autocomplete="email" />
+            <div class="form-error">Enter a valid email</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="modalCheckIn">Checkin Date <span class="req">*</span></label>
+              <input type="date" id="modalCheckIn" required />
+              <div class="form-error">Select check-in</div>
+            </div>
+            <div class="form-group">
+              <label for="modalCheckOut">Checkout Date <span class="req">*</span></label>
+              <input type="date" id="modalCheckOut" required />
+              <div class="form-error">Must be after check-in</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="modalAdults">Adult</label>
+              <div class="stepper">
+                <button type="button" data-step="-1" data-target="modalAdults">−</button>
+                <input type="number" id="modalAdults" value="2" min="1" max="12" />
+                <button type="button" data-step="1" data-target="modalAdults">+</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="modalChildren">Children <span class="req">*</span></label>
+              <div class="stepper">
+                <button type="button" data-step="-1" data-target="modalChildren">−</button>
+                <input type="number" id="modalChildren" value="0" min="0" max="10" required />
+                <button type="button" data-step="1" data-target="modalChildren">+</button>
+              </div>
+              <div class="form-error">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="modalCottage">Cottage Preference</label>
+            <select id="modalCottage">
+              <option value="All">All</option>
+              <option value="European">European</option>
+              <option value="American">American</option>
+              <option value="African">African</option>
+              <option value="Asian">Asian</option>
+              <option value="Mangala Kutira">Mangala Kutira</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guestMessage">Message</label>
+            <textarea id="guestMessage" rows="3" placeholder="Special requests…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;" data-magnetic>Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close" data-magnetic>
+      <i data-lucide="x" style="width:18px;height:18px;"></i>
+    </button>
+    <img src="" alt="" id="lightboxImg" />
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const isTouch = matchMedia('(hover: none), (pointer: coarse)').matches
+      || 'ontouchstart' in window
+      || navigator.maxTouchPoints > 0;
+    if (isTouch) document.body.classList.add('is-touch');
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Utils ---------- */
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function todayISO() {
+      const d = new Date();
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    }
+    function addDays(iso, days) {
+      const d = new Date(iso + 'T12:00:00');
+      d.setDate(d.getDate() + days);
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    }
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+    /* ---------- Lucide ---------- */
+    if (window.lucide) lucide.createIcons();
+
+    /* ---------- Image fallback (broken Unsplash / CDN) ---------- */
+    const IMG_FALLBACK = 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80';
+    document.addEventListener('error', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'IMG' && !t.dataset.fallback) {
+        t.dataset.fallback = '1';
+        t.src = IMG_FALLBACK;
+      }
+    }, true);
+
+    /* ---------- Nav: transparent over hero, solid after ---------- */
+    const navEl = document.getElementById('nav');
+    function updateNavSolid() {
+      const heroTrack = document.querySelector('.hero-track');
+      const threshold = heroTrack ? heroTrack.offsetHeight * 0.55 : window.innerHeight;
+      navEl.classList.toggle('is-solid', window.scrollY > threshold);
+    }
+    window.addEventListener('scroll', updateNavSolid, { passive: true });
+
+    /* ---------- Lenis + GSAP ---------- */
+    gsap.registerPlugin(ScrollTrigger);
+
+    let lenis = null;
+    if (!reduceMotion && window.Lenis) {
+      lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      lenis.on('scroll', updateNavSolid);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+    updateNavSolid();
+
+    /* ---------- Magnetic cursor ---------- */
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorLabel = document.getElementById('cursorLabel');
+    const mouse = { x: 0, y: 0 };
+    const ring = { x: 0, y: 0 };
+
+    if (!isTouch) {
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        gsap.set(cursorDot, { x: e.clientX, y: e.clientY });
+      });
+      gsap.ticker.add(() => {
+        ring.x += (mouse.x - ring.x) * 0.18;
+        ring.y += (mouse.y - ring.y) * 0.18;
+        gsap.set(cursor, { x: ring.x, y: ring.y });
+      });
+
+      document.querySelectorAll('a, button, [data-magnetic], .tab-pill, .promo-badge, .marquee-item').forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          const drag = el.closest('[data-cursor="DRAG"]') || el.getAttribute('data-cursor') === 'DRAG';
+          cursor.classList.add(drag ? 'is-drag' : 'is-hover');
+          cursorLabel.textContent = drag ? 'DRAG' : '';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('is-hover', 'is-drag');
+          cursorLabel.textContent = '';
+        });
+      });
+
+      document.querySelectorAll('[data-cursor="DRAG"]').forEach((zone) => {
+        zone.addEventListener('mouseenter', () => {
+          cursor.classList.add('is-drag');
+          cursorLabel.textContent = 'DRAG';
+        });
+        zone.addEventListener('mouseleave', () => {
+          cursor.classList.remove('is-drag');
+          cursorLabel.textContent = '';
+        });
+      });
+    }
+
+    /* ---------- Mobile menu ---------- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function closeMobile() {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lenis) lenis.start();
+    }
+    hamburger.addEventListener('click', () => {
+      const open = mobileDrawer.classList.toggle('open');
+      mobileDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (lenis) open ? lenis.stop() : lenis.start();
+    });
+    mobileDrawer.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMobile));
+
+    /* ---------- Video fallback ---------- */
+    const heroVideo = document.getElementById('heroVideo');
+    const videoPortal = document.getElementById('videoPortal');
+    heroVideo.addEventListener('error', () => videoPortal.classList.add('no-video'));
+    setTimeout(() => {
+      if (heroVideo.readyState < 2) videoPortal.classList.add('no-video');
+    }, 3500);
+
+    /* ---------- Hero scroll portal (desktop only) ---------- */
+    const heroOverlay = document.getElementById('heroOverlay');
+    const portalVideo = heroVideo;
+
+    function setupMobileHero() {
+      gsap.set(videoPortal, { clearProps: 'all' });
+      gsap.set(portalVideo, { clearProps: 'transform,scale' });
+      gsap.set(heroOverlay, { opacity: 1, clearProps: 'opacity' });
+      heroOverlay.classList.add('is-active');
+    }
+
+    function setupDesktopHero() {
+      gsap.set(videoPortal, { xPercent: -50, yPercent: -50, left: '58%', top: '50%' });
+
+      if (reduceMotion) {
+        gsap.set(videoPortal, {
+          width: '100%', height: '100%', borderRadius: 0,
+          top: 0, left: 0, xPercent: 0, yPercent: 0, x: 0, y: 0,
+          clipPath: 'none'
+        });
+        gsap.set(portalVideo, { scale: 1 });
+        gsap.set(heroOverlay, { opacity: 1 });
+        heroOverlay.classList.add('is-active');
+        return;
+      }
+
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero-track',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.65,
+          invalidateOnRefresh: true
+        }
+      });
+
+      heroTl
+        .fromTo(videoPortal, {
+          width: () => Math.min(window.innerWidth * 0.38, 520),
+          height: () => window.innerHeight * 0.52,
+          borderRadius: 200,
+          left: '58%',
+          clipPath: 'inset(0% 0% 0% 0% round 200px)'
+        }, {
+          width: () => window.innerWidth,
+          height: () => window.innerHeight,
+          borderRadius: 0,
+          left: '50%',
+          clipPath: 'inset(0% 0% 0% 0% round 0px)',
+          ease: 'none',
+          duration: 0.75
+        }, 0)
+        .fromTo(portalVideo, { scale: 1.25 }, { scale: 1, ease: 'none', duration: 0.75 }, 0)
+        .fromTo(heroOverlay, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.4 }, 0.5);
+
+      ScrollTrigger.create({
+        trigger: '.hero-track',
+        start: '50% top',
+        onEnter: () => heroOverlay.classList.add('is-active'),
+        onLeaveBack: () => heroOverlay.classList.remove('is-active')
+      });
+    }
+
+    const heroMm = gsap.matchMedia();
+    heroMm.add('(max-width: 767px)', () => {
+      setupMobileHero();
+      return () => {
+        heroOverlay.classList.remove('is-active');
+      };
+    });
+    heroMm.add('(min-width: 768px)', () => {
+      setupDesktopHero();
+      return () => {
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger && st.trigger.classList && st.trigger.classList.contains('hero-track')) {
+            st.kill();
+          }
+        });
+      };
+    });
+
+    /* ---------- Split headings ---------- */
+    function splitHeadings() {
+      document.querySelectorAll('.split-heading').forEach((heading) => {
+        if (heading.dataset.split) return;
+        heading.dataset.split = '1';
+        const html = heading.innerHTML;
+        const parts = html.split(/(<em>.*?<\/em>)/g).filter(Boolean);
+        heading.innerHTML = '';
+        parts.forEach((part) => {
+          const line = document.createElement('span');
+          line.className = 'split-line';
+          if (part.startsWith('<em>')) {
+            const word = document.createElement('span');
+            word.className = 'split-word';
+            word.innerHTML = part;
+            line.appendChild(word);
+          } else {
+            part.trim().split(/\s+/).forEach((w, i, arr) => {
+              const word = document.createElement('span');
+              word.className = 'split-word';
+              word.textContent = w + (i < arr.length - 1 ? '\u00A0' : '');
+              line.appendChild(word);
+            });
+          }
+          heading.appendChild(line);
+        });
+      });
+
+      document.querySelectorAll('.split-heading').forEach((heading) => {
+        const words = heading.querySelectorAll('.split-word');
+        gsap.to(words, {
+          y: '0%',
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.04,
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    }
+    splitHeadings();
+
+    /* ---------- Parallax image windows ---------- */
+    document.querySelectorAll('.parallax-window').forEach((win) => {
+      const img = win.querySelector('img');
+      gsap.to(win, {
+        clipPath: 'inset(0% 0 0 0)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: win,
+          start: 'top 90%',
+          end: 'top 40%',
+          scrub: true
+        }
+      });
+      if (!reduceMotion) {
+        gsap.fromTo(img, { yPercent: -15 }, {
+          yPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: win,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+    });
+
+    /* Offer parallax */
+    if (!reduceMotion) {
+      gsap.fromTo('#offerParallax', { yPercent: -12 }, {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: '#offer', start: 'top bottom', end: 'bottom top', scrub: true }
+      });
+    }
+
+    /* ---------- Stat counters ---------- */
+    ScrollTrigger.create({
+      trigger: '#statRow',
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        document.querySelectorAll('[data-count]').forEach((el) => {
+          const target = +el.dataset.count;
+          const suffix = el.dataset.suffix || '';
+          const obj = { v: 0 };
+          gsap.to(obj, {
+            v: target,
+            duration: 1.6,
+            ease: 'power2.out',
+            onUpdate: () => { el.textContent = Math.round(obj.v) + suffix; }
+          });
+        });
+      }
+    });
+
+    /* ---------- COTTAGES DATA + COVERFLOW ---------- */
+    const cottages = [
+      {
+        id: 'European',
+        title: 'European Cottage',
+        desc: 'Continental architectural elegance nestled amidst lush tropical palms.',
+        img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'American',
+        title: 'American Cottage',
+        desc: 'Expansive timber-styled luxury designed for unforgettable family holidays.',
+        img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'African',
+        title: 'African Cottage',
+        desc: 'Earthy rustic-luxury textures with warm ambient lighting and private sit-outs.',
+        img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'Asian',
+        title: 'Asian Cottage',
+        desc: 'Zen-inspired tranquil living crafted with natural bamboo, stone, and water vistas.',
+        img: 'https://images.unsplash.com/photo-1610641818989-c2051b5c2c8f?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'Mangala Kutira',
+        title: 'Mangala Kutira',
+        desc: 'Signature heritage village sanctuary blending royal Mysuru charm with modern comfort.',
+        img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80'
+      }
+    ];
+
+    const amenities = ['Private Garden', 'Climate Control', 'Artisan Dining', 'Wi-Fi'];
+    const track = document.getElementById('coverflowTrack');
+    const tabs = document.getElementById('coverflowTabs');
+    let cfIndex = 0;
+    let cfDragging = false;
+    let cfStartX = 0;
+    let cfDelta = 0;
+
+    cottages.forEach((c, i) => {
+      const card = document.createElement('article');
+      card.className = 'cottage-card';
+      card.innerHTML = `
+        <img src="${c.img}" alt="${c.title}" draggable="false" />
+        <div class="cottage-body">
+          <h3>${c.title}</h3>
+          <p>${c.desc}</p>
+          <div class="amenity-row">${amenities.map(a => `<span class="amenity">${a}</span>`).join('')}</div>
+          <button class="btn btn-gold" data-open-modal data-cottage="${c.id}" type="button">Reserve This Cottage →</button>
+        </div>`;
+      track.appendChild(card);
+
+      const tab = document.createElement('button');
+      tab.className = 'tab-pill' + (i === 0 ? ' active' : '');
+      tab.type = 'button';
+      tab.textContent = c.id === 'Mangala Kutira' ? 'Mangala Kutira' : c.id;
+      tab.addEventListener('click', () => setCoverflow(i));
+      tabs.appendChild(tab);
+    });
+
+    const cfCards = Array.from(track.children);
+
+    function setCoverflow(index, animate = true) {
+      cfIndex = (index + cottages.length) % cottages.length;
+      cfCards.forEach((card, i) => {
+        let offset = i - cfIndex;
+        if (offset > cottages.length / 2) offset -= cottages.length;
+        if (offset < -cottages.length / 2) offset += cottages.length;
+
+        const abs = Math.abs(offset);
+        const props = {
+          x: offset * (window.innerWidth < 768 ? 64 : 168),
+          z: abs === 0 ? 0 : -110 - abs * 30,
+          rotateY: offset * -22,
+          scale: abs === 0 ? 1 : 0.88 - abs * 0.03,
+          opacity: abs > 2 ? 0 : 1,
+          filter: abs === 0 ? 'brightness(1)' : 'brightness(0.55)',
+          zIndex: 10 - abs,
+          duration: animate ? 0.7 : 0,
+          ease: 'power3.out'
+        };
+        gsap.to(card, props);
+      });
+
+      document.getElementById('cfIndex').textContent = pad(cfIndex + 1);
+      document.getElementById('cfProgress').style.width = ((cfIndex + 1) / cottages.length * 100) + '%';
+      tabs.querySelectorAll('.tab-pill').forEach((t, i) => t.classList.toggle('active', i === cfIndex));
+    }
+    setCoverflow(0, false);
+    if (window.lucide) lucide.createIcons();
+
+    document.getElementById('cfPrev').addEventListener('click', () => setCoverflow(cfIndex - 1));
+    document.getElementById('cfNext').addEventListener('click', () => setCoverflow(cfIndex + 1));
+
+    const coverflow = document.getElementById('coverflow');
+    function onCfPointerDown(x) {
+      cfDragging = true;
+      cfStartX = x;
+      cfDelta = 0;
+    }
+    function onCfPointerMove(x) {
+      if (!cfDragging) return;
+      cfDelta = x - cfStartX;
+      gsap.to(track, { x: cfDelta * 0.35, duration: 0.1 });
+    }
+    function onCfPointerUp() {
+      if (!cfDragging) return;
+      cfDragging = false;
+      gsap.to(track, { x: 0, duration: 0.4, ease: 'power3.out' });
+      if (Math.abs(cfDelta) > 60) setCoverflow(cfIndex + (cfDelta < 0 ? 1 : -1));
+    }
+    coverflow.addEventListener('mousedown', (e) => onCfPointerDown(e.clientX));
+    window.addEventListener('mousemove', (e) => onCfPointerMove(e.clientX));
+    window.addEventListener('mouseup', onCfPointerUp);
+    coverflow.addEventListener('touchstart', (e) => onCfPointerDown(e.touches[0].clientX), { passive: true });
+    coverflow.addEventListener('touchmove', (e) => onCfPointerMove(e.touches[0].clientX), { passive: true });
+    coverflow.addEventListener('touchend', onCfPointerUp);
+    coverflow.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+        e.preventDefault();
+        if (Math.abs(e.deltaX || e.deltaY) > 20) {
+          setCoverflow(cfIndex + ((e.deltaX || e.deltaY) > 0 ? 1 : -1));
+        }
+      }
+    }, { passive: false });
+
+    /* Rebind modal buttons after dynamic cards */
+    function bindModalTriggers(root = document) {
+      root.querySelectorAll('[data-open-modal]').forEach((btn) => {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', () => {
+          openModal({
+            cottage: btn.getAttribute('data-cottage') || undefined,
+            summer: btn.hasAttribute('data-summer-offer')
+          });
+        });
+      });
+    }
+    bindModalTriggers();
+
+    /* ---------- Split curtain drawers ---------- */
+    const drawerData = {
+      dining: {
+        meta: 'Eat and Drink',
+        title: 'Indulge in exceptional & Local Foodies',
+        body: `<p>At Tropical Villages, dining is an immersion into Mysuru’s culinary soul. Our kitchens celebrate farm-to-table produce from verdant gardens, regional spices, and multi-cuisine craftsmanship served amidst nature.</p><p>From intimate candlelit evenings to leisurely family brunches beneath the palms — every plate is an invitation to linger.</p>`
+      },
+      wellness: {
+        meta: 'Wellness',
+        title: 'A truly luxurious experience for the senses',
+        body: `<p>Holistic rejuvenation awaits in our botanical wellness spaces. Nature walks through swaying palms, restorative therapies, and quiet gardens designed for deep restoration.</p><p>Whether you seek stillness or gentle renewal, our sanctuary in Varuna offers a luxurious reset for body and mind.</p>`
+      }
+    };
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    function openDrawer(key) {
+      const d = drawerData[key];
+      if (!d) return;
+      document.getElementById('drawerMeta').textContent = d.meta;
+      document.getElementById('drawerTitle').textContent = d.title;
+      document.getElementById('drawerBody').innerHTML = d.body;
+      drawerOverlay.classList.add('open');
+      if (lenis) lenis.stop();
+      if (window.lucide) lucide.createIcons();
+      bindModalTriggers(drawerOverlay);
+    }
+    function closeDrawer() {
+      drawerOverlay.classList.remove('open');
+      if (lenis) lenis.start();
+    }
+    document.querySelectorAll('[data-drawer-open]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDrawer(btn.getAttribute('data-drawer-open'));
+      });
+    });
+    document.querySelectorAll('.curtain-panel').forEach((panel) => {
+      panel.addEventListener('click', (e) => {
+        if (e.target.closest('button')) return;
+        if (window.innerWidth <= 768) openDrawer(panel.getAttribute('data-drawer'));
+      });
+    });
+    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', (e) => { if (e.target === drawerOverlay) closeDrawer(); });
+
+    /* ---------- Promo copy ---------- */
+    document.getElementById('promoBadge').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText('TROPICAL10'); } catch (_) {}
+      const toast = document.getElementById('copyToast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+
+    /* ---------- Testimonials stack ---------- */
+    const testimonials = [
+      {
+        quote: 'The Asian Cottage felt like a private zen retreat. Our children loved the gardens, and we finally found the peace we were craving just outside Mysuru.',
+        author: 'Priya & Arjun Mehta',
+        meta: 'Family stay · Asian Cottage',
+        img: 'https://images.unsplash.com/photo-1610641818989-c2051b5c2c8f?auto=format&fit=crop&w=800&q=80',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80'
+      },
+      {
+        quote: 'Hospitality that feels personal. Mangala Kutira blended heritage charm with every modern comfort — truly a luxury village experience.',
+        author: 'Ananya Rao',
+        meta: 'Couple getaway · Mangala Kutira',
+        img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=80'
+      },
+      {
+        quote: 'We booked the American Cottage for a multi-gen trip. Spacious, serene, and the farm-fresh dining made our Mysuru weekend unforgettable.',
+        author: 'The Kapoor Family',
+        meta: 'Family holiday · American Cottage',
+        img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80'
+      },
+      {
+        quote: 'From the European Cottage sit-out to evening walks under palms — Tropical Villages redefined what a family nature resort can be.',
+        author: 'Rahul & Meera Iyer',
+        meta: 'Weekend escape · European Cottage',
+        img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80'
+      }
+    ];
+
+    const stage = document.getElementById('testimonialStage');
+    let tIndex = 0;
+    let tBusy = false;
+
+    function renderTestimonials() {
+      stage.innerHTML = '';
+      for (let layer = 0; layer < 4; layer++) {
+        const data = testimonials[(tIndex + layer) % testimonials.length];
+        const card = document.createElement('div');
+        card.className = 't-card';
+        card.innerHTML = `
+          <div class="t-card-img">
+            <img src="${data.img}" alt="${data.meta}" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          <div class="t-card-body">
+            <div class="stars">★★★★★</div>
+            <blockquote>“${data.quote}”</blockquote>
+            <div class="author">
+              <img class="author-avatar" src="${data.avatar}" alt="${data.author}" loading="lazy" referrerpolicy="no-referrer" />
+              <div class="author-meta">${data.author}<span>${data.meta}</span></div>
+            </div>
+          </div>`;
+        gsap.set(card, {
+          y: layer * 8,
+          scale: 1 - layer * 0.03,
+          opacity: 1 - layer * 0.15,
+          zIndex: 10 - layer,
+          rotateZ: layer * 0.4
+        });
+        stage.appendChild(card);
+      }
+    }
+    renderTestimonials();
+
+    function nextStory() {
+      if (tBusy) return;
+      tBusy = true;
+      const front = stage.querySelector('.t-card');
+      gsap.to(front, {
+        x: window.innerWidth * 0.4,
+        y: -40,
+        rotateZ: 12,
+        opacity: 0,
+        duration: 0.55,
+        ease: 'power3.in',
+        onComplete: () => {
+          tIndex = (tIndex + 1) % testimonials.length;
+          renderTestimonials();
+          const cards = stage.querySelectorAll('.t-card');
+          gsap.from(cards, {
+            y: (i) => 40 + i * 10,
+            opacity: 0,
+            stagger: 0.05,
+            duration: 0.55,
+            ease: 'power3.out',
+            onComplete: () => { tBusy = false; }
+          });
+        }
+      });
+    }
+    document.getElementById('nextStory').addEventListener('click', nextStory);
+
+    let tDrag = false, tSX = 0;
+    stage.addEventListener('mousedown', (e) => { tDrag = true; tSX = e.clientX; });
+    window.addEventListener('mouseup', (e) => {
+      if (!tDrag) return;
+      tDrag = false;
+      if (Math.abs(e.clientX - tSX) > 50) nextStory();
+    });
+    stage.addEventListener('touchstart', (e) => { tSX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+      const x = e.changedTouches[0].clientX;
+      if (Math.abs(x - tSX) > 50) nextStory();
+    });
+
+    /* ---------- Marquee gallery ---------- */
+    const galleryItems = [
+      { cat: 'heritage', caption: 'Mangala Kutira — Heritage Courtyard', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'asian', caption: 'Asian Cottage — Zen Pavilion', img: 'https://images.unsplash.com/photo-1610641818989-c2051b5c2c8f?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'american', caption: 'American Cottage — Timber Living', img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'african', caption: 'African Cottage — Earthy Suite', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'european', caption: 'European Cottage — Tropical Elegance', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'heritage', caption: 'Kerala Heritage — Verdant Walk', img: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'asian', caption: 'Poolside Serenity at Dusk', img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80' },
+      { cat: 'european', caption: 'Suite Details — Soft Light', img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80' }
+    ];
+
+    function buildMarquee(row, reverse) {
+      const seq = reverse ? [...galleryItems].reverse() : galleryItems;
+      const doubled = seq.concat(seq);
+      row.innerHTML = doubled.map((item) => `
+        <div class="marquee-item" data-category="${item.cat}" data-caption="${item.caption}">
+          <img src="${item.img}" alt="${item.caption}" loading="lazy" />
+          <div class="marquee-caption">${item.caption}</div>
+        </div>`).join('');
+    }
+    const marqueeA = document.getElementById('marqueeA');
+    const marqueeB = document.getElementById('marqueeB');
+    buildMarquee(marqueeA, false);
+    buildMarquee(marqueeB, true);
+
+    let marqueeX1 = 0;
+    let marqueeX2 = 0;
+    let baseSpeed = 0.45;
+    let velocityBoost = 0;
+    let skewAmt = 0;
+
+    function marqueeLoop() {
+      const speed = baseSpeed + velocityBoost;
+      marqueeX1 -= speed;
+      marqueeX2 += speed;
+      const wA = marqueeA.scrollWidth / 2;
+      const wB = marqueeB.scrollWidth / 2;
+      if (Math.abs(marqueeX1) >= wA) marqueeX1 = 0;
+      if (marqueeX2 >= wB) marqueeX2 = 0;
+      skewAmt += ((velocityBoost * 2.2) - skewAmt) * 0.08;
+      gsap.set(marqueeA, { x: marqueeX1, skewX: -skewAmt });
+      gsap.set(marqueeB, { x: -marqueeX2, skewX: skewAmt });
+      velocityBoost *= 0.94;
+      requestAnimationFrame(marqueeLoop);
+    }
+    marqueeLoop();
+
+    if (lenis) {
+      lenis.on('scroll', (e) => {
+        const v = Math.min(Math.abs(e.velocity), 40);
+        velocityBoost = v * 0.12;
+      });
+    } else {
+      let lastY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const dy = Math.abs(window.scrollY - lastY);
+        lastY = window.scrollY;
+        velocityBoost = Math.min(dy * 0.08, 6);
+      }, { passive: true });
+    }
+
+    /* Gallery filter */
+    let galleryFilter = 'all';
+    document.querySelectorAll('#galleryFilters .tab-pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#galleryFilters .tab-pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        galleryFilter = btn.dataset.filter;
+        document.querySelectorAll('.marquee-item').forEach((item) => {
+          const show = galleryFilter === 'all' || item.dataset.category === galleryFilter;
+          item.classList.toggle('filtered-out', !show);
+        });
+      });
+    });
+
+    /* Lightbox */
+    const lightbox = document.getElementById('lightbox');
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxImg').alt = caption;
+      document.getElementById('lightboxCaption').textContent = caption;
+      lightbox.classList.add('open');
+      if (lenis) lenis.stop();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      if (lenis) lenis.start();
+    }
+    document.querySelectorAll('.marquee-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        openLightbox(item.querySelector('img').src, item.dataset.caption);
+      });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    /* ---------- Blog tilt ---------- */
+    if (!isTouch) {
+      document.querySelectorAll('[data-tilt]').forEach((card) => {
+        const img = card.querySelector('.blog-img img');
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(img, { rotateY: x * 12, rotateX: -y * 10, scale: 1.06, duration: 0.4, ease: 'power2.out', transformPerspective: 800 });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(img, { rotateY: 0, rotateX: 0, scale: 1, duration: 0.6, ease: 'power3.out' });
+        });
+      });
+    }
+
+    /* ---------- Booking modal ---------- */
+    const modal = document.getElementById('bookingModal');
+    const bookingForm = document.getElementById('bookingForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const guestPhone = document.getElementById('guestPhone');
+    const phoneCounter = document.getElementById('phoneCounter');
+    const modalCheckIn = document.getElementById('modalCheckIn');
+    const modalCheckOut = document.getElementById('modalCheckOut');
+    const heroCheckIn = document.getElementById('heroCheckIn');
+    const heroCheckOut = document.getElementById('heroCheckOut');
+
+    const today = todayISO();
+    heroCheckIn.min = today;
+    heroCheckIn.value = today;
+    heroCheckOut.min = addDays(today, 1);
+    heroCheckOut.value = addDays(today, 3);
+    modalCheckIn.min = today;
+
+    function syncOut(ci, co) {
+      const min = addDays(ci.value || today, 1);
+      co.min = min;
+      if (!co.value || co.value < min) co.value = min;
+    }
+    heroCheckIn.addEventListener('change', () => syncOut(heroCheckIn, heroCheckOut));
+    modalCheckIn.addEventListener('change', () => syncOut(modalCheckIn, modalCheckOut));
+
+    function openModal(opts = {}) {
+      closeMobile();
+      closeDrawer();
+      modalSuccess.classList.remove('show');
+      bookingForm.classList.remove('hide');
+      bookingForm.reset();
+      bookingForm.querySelectorAll('.form-group').forEach((g) => g.classList.remove('invalid'));
+
+      const checkIn = opts.checkIn || today;
+      const checkOut = opts.checkOut || (opts.summer ? addDays(checkIn, 3) : addDays(checkIn, 3));
+      modalCheckIn.value = checkIn;
+      syncOut(modalCheckIn, modalCheckOut);
+      modalCheckOut.value = checkOut;
+
+      document.getElementById('modalAdults').value = opts.adults || 2;
+      document.getElementById('modalChildren').value = opts.children != null ? opts.children : 0;
+      if (opts.cottage) document.getElementById('modalCottage').value = opts.cottage;
+
+      phoneCounter.textContent = '0 / 10';
+      phoneCounter.classList.remove('complete');
+      modal.classList.add('open');
+      if (lenis) lenis.stop();
+      setTimeout(() => document.getElementById('guestName').focus(), 280);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      if (lenis) lenis.start();
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    document.getElementById('heroBookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      openModal({
+        checkIn: heroCheckIn.value,
+        checkOut: heroCheckOut.value,
+        adults: document.getElementById('heroAdults').value,
+        children: document.getElementById('heroChildren').value,
+        cottage: document.getElementById('heroCottage').value
+      });
+    });
+
+    guestPhone.addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+      const n = this.value.length;
+      phoneCounter.textContent = n + ' / 10';
+      phoneCounter.classList.toggle('complete', n === 10);
+    });
+
+    document.querySelectorAll('.stepper button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.target);
+        const step = +btn.dataset.step;
+        const min = +input.min || 0;
+        const max = +input.max || 99;
+        input.value = clamp((+input.value || 0) + step, min, max);
+      });
+    });
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+      function req(id, test) {
+        const el = document.getElementById(id);
+        const group = el.closest('.form-group');
+        const pass = test(el.value);
+        group.classList.toggle('invalid', !pass);
+        if (!pass) ok = false;
+      }
+      req('guestName', (v) => v.trim().length > 1);
+      req('guestPhone', (v) => /^[0-9]{10}$/.test(v));
+      req('guestEmail', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      req('modalCheckIn', (v) => !!v);
+      req('modalCheckOut', (v) => !!v && v > modalCheckIn.value);
+      req('modalChildren', (v) => v !== '' && v != null);
+      if (!ok) return;
+      bookingForm.classList.add('hide');
+      modalSuccess.classList.add('show');
+      if (window.lucide) lucide.createIcons();
+      setTimeout(closeModal, 2600);
+    });
+
+    /* ---------- Newsletter ---------- */
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('nlEmail').value.trim();
+      const msg = document.getElementById('nlMsg');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.classList.add('show', 'error');
+        return;
+      }
+      msg.textContent = 'You have been successfully Subscribed!';
+      msg.classList.remove('error');
+      msg.classList.add('show');
+      e.target.reset();
+      setTimeout(() => msg.classList.remove('show'), 4000);
+    });
+
+    /* ---------- Escape ---------- */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeDrawer();
+        closeLightbox();
+        closeMobile();
+      }
+    });
+
+    /* ---------- Smooth anchor via Lenis ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(target, { offset: -80 });
+        else target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      setCoverflow(cfIndex, false);
+      ScrollTrigger.refresh();
+    });
+
+    /* Refresh after fonts/images */
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  })();
+  </script>
+</body>
+</html>
